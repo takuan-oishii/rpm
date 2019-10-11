@@ -77,7 +77,11 @@ module NewRelic
       Agent.logger.error('--------------------------------------------------------')
       
       Agent.logger.error(NewRelic::Control.instance.env)
-      Agent.logger.error(ActiveRecord::Base.configurations)
+      Agent.logger.error('--------------------------------------------------------')
+      Agent.logger.error(ActiveRecord::Base.configs_for)
+      Agent.logger.error('--------------------------------------------------------')
+      Agent.logger.error(ActiveRecord::Base.configs_for.class)
+      Agent.logger.error('--------------------------------------------------------')
 
       ActiveRecord::Base.configurations[NewRelic::Control.instance.env]['adapter']
     end
