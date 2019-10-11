@@ -75,15 +75,21 @@ module NewRelic
       Agent.logger.error('--------------------------------------------------------')
       Agent.logger.error('--------------------------------------------------------')
       Agent.logger.error('--------------------------------------------------------')
-      
+      Agent.logger.error('NewRelic::Control.instance.env')
       Agent.logger.error(NewRelic::Control.instance.env)
       Agent.logger.error('--------------------------------------------------------')
-      Agent.logger.error(ActiveRecord::Base.configs_for)
+      Agent.logger.error('ActiveRecord::Base.configurations.configs_for')
+      Agent.logger.error(ActiveRecord::Base.configurations.configs_for)
       Agent.logger.error('--------------------------------------------------------')
-      Agent.logger.error(ActiveRecord::Base.configs_for.class)
+      Agent.logger.error('ActiveRecord::Base.configurations.class')
+      Agent.logger.error(ActiveRecord::Base.configurations.class)
+      Agent.logger.error('--------------------------------------------------------')
+      Agent.logger.error('ActiveRecord::Base.configurations.configs_for.class')
+      Agent.logger.error(ActiveRecord::Base.configurations.configs_for.class)
       Agent.logger.error('--------------------------------------------------------')
 
-      ActiveRecord::Base.configurations[NewRelic::Control.instance.env]['adapter']
+      # ActiveRecord::Base.configurations[NewRelic::Control.instance.env]['adapter']
+      ActiveRecord::Base.configurations.to_h[NewRelic::Control.instance.env]['adapter']
     end
     report_on('Framework'       ) { Agent.config[:framework].to_s  }
     report_on('Dispatcher'      ) { Agent.config[:dispatcher].to_s }
