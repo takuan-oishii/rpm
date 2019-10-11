@@ -70,6 +70,7 @@ module NewRelic
     report_on('OS version'        ) { ::NewRelic::Agent::SystemInfo.os_version             }
     report_on('OS'                ) { ::NewRelic::Agent::SystemInfo.ruby_os_identifier     }
     report_on('Database adapter'  ) do
+      raise '-------------------------------------raise-----------------------------------------'
       p ActiveRecord::Base.configurations
       p NewRelic::Control.instance.env
       p ActiveRecord::Base.configurations[NewRelic::Control.instance.env]
