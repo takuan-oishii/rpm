@@ -70,26 +70,8 @@ module NewRelic
     report_on('OS version'        ) { ::NewRelic::Agent::SystemInfo.os_version             }
     report_on('OS'                ) { ::NewRelic::Agent::SystemInfo.ruby_os_identifier     }
     report_on('Database adapter'  ) do
-      Agent.logger.error('--------------------------------------------------------')
-      Agent.logger.error('--------------------------------------------------------')
-      Agent.logger.error('--------------------------------------------------------')
-      Agent.logger.error('--------------------------------------------------------')
-      Agent.logger.error('--------------------------------------------------------')
-      Agent.logger.error('NewRelic::Control.instance.env')
-      Agent.logger.error(NewRelic::Control.instance.env)
-      Agent.logger.error('--------------------------------------------------------')
-      Agent.logger.error('ActiveRecord::Base.configurations.configs_for')
-      Agent.logger.error(ActiveRecord::Base.configurations.configs_for)
-      Agent.logger.error('--------------------------------------------------------')
-      Agent.logger.error('ActiveRecord::Base.configurations.class')
-      Agent.logger.error(ActiveRecord::Base.configurations.class)
-      Agent.logger.error('--------------------------------------------------------')
-      Agent.logger.error('ActiveRecord::Base.configurations.configs_for.class')
-      Agent.logger.error(ActiveRecord::Base.configurations.configs_for.class)
-      Agent.logger.error('--------------------------------------------------------')
-
       # ActiveRecord::Base.configurations[NewRelic::Control.instance.env]['adapter']
-      ActiveRecord::Base.configurations.to_h[NewRelic::Control.instance.env]['adapter']
+      ActiveRecord::Base.configurations.configs_for(env_name: NewRelic::Control.instance.env).first.config["adapter"]
     end
     report_on('Framework'       ) { Agent.config[:framework].to_s  }
     report_on('Dispatcher'      ) { Agent.config[:dispatcher].to_s }
